@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual Cluster HPC UVic-UCC</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -16,15 +16,18 @@
         <ul>
             <li><a href="#vpn-ssh">Connectar-se via VPN i SSH</a></li>
             <li><a href="#slurm">Sistema de Gestió de Jobs: Slurm</a></li>
-            <li><a href="#jobs">Guia Bàsica per Enviar Jobs</a></li>
+            <li><a href="#guia-basica">Guia Bàsica per Enviar Jobs</a></li>
             <li><a href="#transferencia">Transferència de Fitxers</a></li>
+            <li><a href="#recursos">Recursos de la Màquina</a></li>
         </ul>
     </nav>
 
     <main>
         <section id="vpn-ssh">
             <h2>Connectar-se via VPN i SSH</h2>
+            <h3>1. Connexió VPN</h3>
             <p>Primer de tot, heu de seguir el tutorial per connectar-vos via VPN proporcionat per la universitat.</p>
+            <h3>2. Connexió SSH</h3>
             <p>Per connectar-vos al clúster, executeu la següent comanda al terminal:</p>
             <pre><code>ssh -l nom.cognom@uvic.cat</code></pre>
             <p>Introduïu la contrasenya del vostre Campus Virtual quan us la demani.</p>
@@ -32,37 +35,93 @@
 
         <section id="slurm">
             <h2>Sistema de Gestió de Jobs: Slurm</h2>
-            <p>Un cop dins del clúster, utilitzem el sistema <strong>Slurm Management</strong>.</p>
+            <p>Un cop dins del clúster, utilitzem el sistema <strong>Slurm Management</strong>. Podeu trobar la documentació oficial en aquest enllaç: 
+                <a href="https://slurm.schedmd.com/documentation.html" target="_blank">Documentació de Slurm</a>.
+            </p>
         </section>
 
-        <section id="jobs">
+        <section id="guia-basica">
             <h2>Guia Bàsica per Enviar Jobs</h2>
-            <p>Exemple de script bàsic:</p>
+            <h3>1. Crear un Fitxer de Treball (Script sbatch)</h3>
+            <p>Primer, creeu un fitxer amb les ordres que voleu executar. Per exemple, podeu anomenar-lo <code>job_script.sh</code>. Aquest fitxer conté les directives de Slurm i el codi que s'executarà.</p>
+
+            <h4>Exemple de Script Bàsic:</h4>
             <pre><code>
 #!/bin/bash
-#SBATCH --job-name=nom_job
-#SBATCH --output=sortida.txt
-#SBATCH --error=error.txt
-#SBATCH --time=01:00:00
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=4GB
-#SBATCH --partition=normal1
+#SBATCH --job-name=nom_job          # Nom del job
+#SBATCH --output=sortida.txt        # Fitxer de sortida
+#SBATCH --error=error.txt           # Fitxer d’errors
+#SBATCH --time=01:00:00             # Temps màxim (hh:mm:ss)
+#SBATCH --cpus-per-task=4           # Nombre de CPUs per tasca
+#SBATCH --mem=4GB                   # Memòria assignada al job
+#SBATCH --partition=normal1         # Partició del clúster a utilitzar
 
-python script.py
+python script.py                    # Execució del vostre codi
             </code></pre>
+
+            <p><strong>Comentaris:</strong></p>
+            <ul>
+                <li><code>--job-name</code>: Assigna un nom al vostre job per identificar-lo.</li>
+                <li><code>--output</code> i <code>--error</code>: Indiquen els fitxers on es guardarà la sortida i els errors.</li>
+                <li><code>--time</code>: Defineix el temps màxim d'execució.</li>
+                <li><code>--cpus-per-task</code>: Nombre de CPUs assignades al job.</li>
+                <li><code>--mem</code>: Memòria necessària per al job.</li>
+                <li><code>--partition</code>: Partició del clúster adequada per al vostre càlcul.</li>
+            </ul>
+
+            <h3>2. Enviar el Job a Slurm</h3>
+            <p>Per enviar el job, utilitzeu la comanda:</p>
+            <pre><code>sbatch job_script.sh</code></pre>
+            <p>Això us retornarà un <strong>Job ID</strong> (per exemple, <code>12345</code>) que servirà per fer seguiment del job.</p>
+
+            <h3>3. Consultar l’Estat dels Vostres Jobs</h3>
+            <p>Per veure l’estat dels vostres jobs (si estan en cua o en execució), utilitzeu:</p>
+            <pre><code>squeue</code></pre>
+
+            <h4>Estats Comuns dels Jobs:</h4>
+            <ul>
+                <li><strong>PD (PENDING):</strong> El job està en cua.</li>
+                <li><strong>R (RUNNING):</strong> El job està en execució.</li>
+            </ul>
+
+            <h3>4. Cancel·lar un Job</h3>
+            <p>Si necessiteu cancel·lar un job, utilitzeu la comanda <code>scancel</code> amb el <strong>Job ID</strong>:</p>
+            <pre><code>scancel 12345</code></pre>
+
+            <h3>5. Comprovar els Recursos Disponibles</h3>
+            <p>Per veure quins recursos (nodes i particions) estan disponibles, podeu utilitzar:</p>
+            <pre><code>sinfo</code></pre>
+
+            <h3>Un Cop Finalitzat el Job</h3>
+            <p>Quan el job hagi acabat, reviseu els fitxers de sortida (<code>sortida.txt</code>) per veure si ha funcionat correctament.</p>
         </section>
 
         <section id="transferencia">
             <h2>Transferència de Fitxers</h2>
-            <p>Copiar fitxer al clúster:</p>
-            <pre><code>scp fitxer_local.txt nom.cognom@uvic.cat:/path/on/cluster</code></pre>
-            <p>Copiar fitxer del clúster:</p>
-            <pre><code>scp nom.cognom@uvic.cat:/path/on/cluster/fitxer_remot.txt .</code></pre>
+            <p>Per transferir fitxers entre el vostre ordinador i el clúster, utilitzeu la comanda <code>scp</code>. Aquesta comanda permet copiar fitxers de forma segura.</p>
+
+            <h3>Exemple de Comanda <code>scp</code>:</h3>
+            <ul>
+                <li>Per copiar un fitxer des del vostre ordinador al clúster:</li>
+                <pre><code>scp fitxer_local.txt nom.cognom@uvic.cat:/path/on/cluster</code></pre>
+                <li>Per copiar un fitxer des del clúster al vostre ordinador:</li>
+                <pre><code>scp nom.cognom@uvic.cat:/path/on/cluster/fitxer_remot.txt .</code></pre>
+            </ul>
+        </section>
+
+        <section id="recursos">
+            <h2>Recursos de la Màquina</h2>
+            <p>El clúster UVic-UCC està equipat amb:</p>
+            <ul>
+                <li><strong>112 CPUs:</strong> Repartides en diferents nodes per optimitzar càlculs paral·lels.</li>
+                <li><strong>515 GB de RAM:</strong> També distribuïda en nodes segons les necessitats de càlcul.</li>
+                <li><strong>2 GPUs:</strong> Disponibles en un node específic per a càlculs relacionats amb intel·ligència artificial.</li>
+            </ul>
         </section>
     </main>
 
     <footer>
-        <p>Manual creat per UVic-UCC</p>
+        <p>Manual creat per ajudar a nous usuaris del clúster UVic-UCC.</p>
     </footer>
 </body>
 </html>
