@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual Cluster HPC UVic-UCC</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS -->
 </head>
 <body>
     <header>
@@ -16,7 +16,7 @@
         <ul>
             <li><a href="#vpn-ssh">Connectar-se via VPN i SSH</a></li>
             <li><a href="#slurm">Sistema de Gestió de Jobs: Slurm</a></li>
-            <li><a href="#guia-basica">Guia Bàsica per Enviar Jobs</a></li>
+            <li><a href="#jobs">Guia Bàsica per Enviar Jobs</a></li>
             <li><a href="#transferencia">Transferència de Fitxers</a></li>
         </ul>
     </nav>
@@ -24,9 +24,7 @@
     <main>
         <section id="vpn-ssh">
             <h2>Connectar-se via VPN i SSH</h2>
-            <h3>1. Connexió VPN</h3>
             <p>Primer de tot, heu de seguir el tutorial per connectar-vos via VPN proporcionat per la universitat.</p>
-            <h3>2. Connexió SSH</h3>
             <p>Per connectar-vos al clúster, executeu la següent comanda al terminal:</p>
             <pre><code>ssh -l nom.cognom@uvic.cat</code></pre>
             <p>Introduïu la contrasenya del vostre Campus Virtual quan us la demani.</p>
@@ -34,50 +32,37 @@
 
         <section id="slurm">
             <h2>Sistema de Gestió de Jobs: Slurm</h2>
-            <p>Un cop dins del clúster, utilitzem el sistema <strong>Slurm Management</strong>. Podeu trobar la documentació oficial en aquest enllaç: 
-                <a href="https://slurm.schedmd.com/documentation.html" target="_blank">Documentació de Slurm</a>.
-            </p>
+            <p>Un cop dins del clúster, utilitzem el sistema <strong>Slurm Management</strong>.</p>
         </section>
 
-        <section id="guia-basica">
+        <section id="jobs">
             <h2>Guia Bàsica per Enviar Jobs</h2>
-            <h3>1. Crear un Fitxer de Treball (Script sbatch)</h3>
-            <p>Creeu un fitxer amb les ordres que voleu executar. Per exemple, podeu anomenar-lo <code>job_script.sh</code>.</p>
+            <p>Exemple de script bàsic:</p>
             <pre><code>
 #!/bin/bash
-#SBATCH --job-name=nom_job           # Nom del job
-#SBATCH --output=sortida.txt          # Fitxer de sortida
-#SBATCH --error=error.txt             # Fitxer d’errors
-#SBATCH --time=01:00:00               # Temps màxim (hh:mm:ss)
-#SBATCH --cpus-per-task=4             # Núm. de CPUs per tasca
-#SBATCH --mem=4GB                     # Memòria assignada
-#SBATCH --partition=normal1           # Partició a utilitzar
+#SBATCH --job-name=nom_job
+#SBATCH --output=sortida.txt
+#SBATCH --error=error.txt
+#SBATCH --time=01:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=4GB
+#SBATCH --partition=normal1
 
-python script.py                      # Execució del codi
+python script.py
             </code></pre>
-            <p>Els fitxers d’error us indiquen possibles problemes durant l’execució del codi.</p>
-            <p><strong>Nota:</strong> Heu de carregar els paquets necessaris abans d'executar el codi.</p>
-
-            <h3>2. Enviar el Job a Slurm</h3>
-            <p>Per enviar el job, utilitzeu la comanda:</p>
-            <pre><code>sbatch job_script.sh</code></pre>
         </section>
 
         <section id="transferencia">
             <h2>Transferència de Fitxers</h2>
-            <p>Per transferir fitxers entre el vostre ordinador i el clúster, utilitzeu la comanda <code>scp</code>.</p>
-            <h3>Exemples de comandes <code>scp</code>:</h3>
-            <ul>
-                <li>Copiar un fitxer des del vostre ordinador al clúster:</li>
-                <pre><code>scp fitxer_local.txt nom.cognom@uvic.cat:/path/on/cluster</code></pre>
-                <li>Copiar un fitxer des del clúster al vostre ordinador:</li>
-                <pre><code>scp nom.cognom@uvic.cat:/path/on/cluster/fitxer_remot.txt .</code></pre>
-            </ul>
+            <p>Copiar fitxer al clúster:</p>
+            <pre><code>scp fitxer_local.txt nom.cognom@uvic.cat:/path/on/cluster</code></pre>
+            <p>Copiar fitxer del clúster:</p>
+            <pre><code>scp nom.cognom@uvic.cat:/path/on/cluster/fitxer_remot.txt .</code></pre>
         </section>
     </main>
 
     <footer>
-        <p>Manual creat per ajudar a nous usuaris del clúster UVic-UCC.</p>
+        <p>Manual creat per UVic-UCC</p>
     </footer>
 </body>
 </html>
