@@ -1,0 +1,58 @@
+/* styles.css */
+
+/* General page styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header styles */
+h1, h2 {
+    color: #0056b3;
+    margin-bottom: 10px;
+}
+
+/* Table of Contents */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 5px 0;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #0056b3;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Section styles */
+section {
+    margin: 20px 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 5px;
+}
+
+/* Back to top link */
+.back-to-top {
+    display: block;
+    margin-top: 20px;
+    text-align: right;
+}
+
+.back-to-top a {
+    text-decoration: none;
+    color: #0056b3;
+}
+
