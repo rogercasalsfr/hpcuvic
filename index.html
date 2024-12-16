@@ -16,10 +16,8 @@
         <ul>
             <li><a href="#introduccio">Introducció i Recursos del Clúster</a></li>
             <li><a href="#vpn-ssh">Connectar-se via VPN i SSH</a></li>
-            <li><a href="#slurm">Sistema de Gestió de Jobs: Slurm</a></li>
             <li><a href="#guia-basica">Guia Bàsica per Enviar Jobs</a></li>
             <li><a href="#transferencia">Transferència de Fitxers</a></li>
-            <li><a href="#comandaments">Comandaments de Slurm</a></li>
         </ul>
     </nav>
 
@@ -51,6 +49,9 @@
                 <li><strong>2 GPUs:</strong> Disponibles per a càlculs d'intel·ligència artificial.</li>
                 <li><strong>8 TB d'emmagatzematge:</strong> Per guardar dades i resultats.</li>
             </ul>
+	    <h3>Sistema de Gestió de Jobs: Slurm</h3>                                                                                                           <p>                                                                                                                                                     Un cop dins del clúster, utilitzem el sistema <strong>Slurm Management</strong>. Podeu trobar la documentació oficial en aquest enllaç:
+                <a href="https://slurm.schedmd.com/documentation.html" target="_blank">Documentació de Slurm</a>.
+            </p>
             <h3>Administradors del clúster</h3>
             <ul>
                 <li><strong>Jordi Sala Serra</strong>: Tècnic de l'àrea TIC de la UVic-UCC (<a href="mailto:jordi.sala@uvic.cat">jordi.sala@uvic.cat</a>).</li>
@@ -75,14 +76,7 @@
             </p>
         </section>
 
-        <section id="slurm">
-            <h2>Sistema de Gestió de Jobs: Slurm</h2>
-            <p>
-                Un cop dins del clúster, utilitzem el sistema <strong>Slurm Management</strong>. Podeu trobar la documentació oficial en aquest enllaç:
-                <a href="https://slurm.schedmd.com/documentation.html" target="_blank">Documentació de Slurm</a>.
-            </p>
-        </section>
-
+  
         <section id="guia-basica">
             <h2>Guia Bàsica per Enviar Jobs</h2>
             <h3>1. Crear un Fitxer de Treball (Script sbatch)</h3>
@@ -115,28 +109,9 @@ python script.py                    # Execució del vostre codi
                 <li><code>--cpus-per-task</code>: Estableix el nombre de CPUs assignades al job.</li>
                 <li><code>--mem</code>: Defineix la memòria necessària per al job.</li>
             </ul>
-        </section>
 
-        <section id="transferencia">
-            <h2>Transferència de Fitxers</h2>
-            <p>
-                Per transferir fitxers entre el vostre ordinador i el clúster, utilitzeu la comanda <code>scp</code>.
-            </p>
-            <h3>Exemples de Comandes <code>scp</code>:</h3>
-            <ul>
-                <li>
-                    Per copiar un fitxer des del vostre ordinador al clúster:
-                    <pre><code>scp fitxer_local.txt nom.cognom@uvic.cat:/path/on/cluster</code></pre>
-                </li>
-                <li>
-                    Per copiar un fitxer des del clúster al vostre ordinador:
-                    <pre><code>scp nom.cognom@uvic.cat:/path/on/cluster/fitxer_remot.txt .</code></pre>
-                </li>
-            </ul>
-        </section>
 
-        <section id="comandaments">
-            <h2>Comandaments de Slurm</h2>
+	    <h2>Comandaments de Slurm</h2>
             <h3>2. Enviar el Job a Slurm</h3>
             <p>Per enviar el job, utilitzeu:</p>
             <pre><code>sbatch job_script.sh</code></pre>
@@ -158,6 +133,24 @@ python script.py                    # Execució del vostre codi
             <h3>5. Comprovar els Recursos Disponibles</h3>
             <p>Per veure quins recursos (nodes i particions) estan disponibles, utilitzeu:</p>
             <pre><code>sinfo</code></pre>
+        </section>
+
+        <section id="transferencia">
+            <h2>Transferència de Fitxers</h2>
+            <p>
+                Per transferir fitxers entre el vostre ordinador i el clúster, utilitzeu la comanda <code>scp</code>.
+            </p>
+            <h3>Exemples de Comandes <code>scp</code>:</h3>
+            <ul>
+                <li>
+                    Per copiar un fitxer des del vostre ordinador al clúster:
+                    <pre><code>scp fitxer_local.txt nom.cognom@uvic.cat:/path/on/cluster</code></pre>
+                </li>
+                <li>
+                    Per copiar un fitxer des del clúster al vostre ordinador:
+                    <pre><code>scp nom.cognom@uvic.cat:/path/on/cluster/fitxer_remot.txt .</code></pre>
+                </li>
+            </ul>
         </section>
     </main>
 
