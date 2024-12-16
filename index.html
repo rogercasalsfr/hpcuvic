@@ -19,6 +19,7 @@
             <li><a href="#slurm">Sistema de Gestió de Jobs: Slurm</a></li>
             <li><a href="#guia-basica">Guia Bàsica per Enviar Jobs</a></li>
             <li><a href="#transferencia">Transferència de Fitxers</a></li>
+            <li><a href="#comandaments">Comandaments de Slurm</a></li>
         </ul>
     </nav>
 
@@ -36,11 +37,13 @@
                 eficient. Un dels ordinadors, anomenat node mestre o node d'inici de sessió, s'encarrega d'assignar els
                 programes (anomenats jobs) als altres ordinadors mitjançant un gestor de cues (scheduler).
             </p>
-            <p>
-                Els jobs que no poden ser executats immediatament es col·loquen en una cua fins que un ordinador estigui lliure.
-                Per evitar que un job bloquegi els recursos indefinidament, el scheduler defineix un temps màxim d'execució
-                (walltime). Els nodes es poden organitzar en cues amb diferents límits de temps per optimitzar l'ús dels recursos.
-            </p>
+            
+            <!-- Afegim la imatge -->
+            <figure>
+                <img src="imatges/compute_cluster.png" alt="Representació d'un clúster de càlcul" style="max-width: 100%; height: auto;">
+                <figcaption>Representació esquemàtica d'un clúster de càlcul.</figcaption>
+            </figure>
+            
             <h3>Recursos del Clúster</h3>
             <ul>
                 <li><strong>112 CPUs:</strong> Distribuïdes en diferents nodes per optimitzar el càlcul paral·lel.</li>
@@ -82,36 +85,7 @@
 
         <section id="guia-basica">
             <h2>Guia Bàsica per Enviar Jobs</h2>
-            <h3>1. Crear un Fitxer de Treball (Script sbatch)</h3>
-            <p>
-                Es recomana mantenir una estructura clara per als vostres directoris:
-            </p>
-            <ul>
-                <li><strong>data/</strong>: Conté les dades d'entrada.</li>
-                <li><strong>results/</strong>: Guarda els resultats del càlcul.</li>
-                <li><strong>scripts/</strong>: Inclou els scripts de treball (<code>.sh</code>).</li>
-            </ul>
-            <h4>Exemple de Script Bàsic:</h4>
-            <pre><code>
-#!/bin/bash
-#SBATCH --job-name=nom_job          # Nom del job
-#SBATCH --output=sortida.txt        # Fitxer de sortida
-#SBATCH --error=error.txt           # Fitxer d’errors
-#SBATCH --time=01:00:00             # Temps màxim (hh:mm:ss)
-#SBATCH --cpus-per-task=4           # Nombre de CPUs per tasca
-#SBATCH --mem=4GB                   # Memòria assignada
-
-python script.py                    # Execució del vostre codi
-            </code></pre>
-            <p><strong>Comentaris:</strong></p>
-            <ul>
-                <li><code>--job-name</code>: Assigna un nom al vostre job per identificar-lo fàcilment.</li>
-                <li><code>--output</code>: Especifica el fitxer on es guardarà la sortida del job.</li>
-                <li><code>--error</code>: Indica el fitxer on es guardaran els errors.</li>
-                <li><code>--time</code>: Defineix el temps màxim d'execució del job.</li>
-                <li><code>--cpus-per-task</code>: Estableix el nombre de CPUs assignades al job.</li>
-                <li><code>--mem</code>: Defineix la memòria necessària per al job.</li>
-            </ul>
+            <p>Consulteu els passos detallats més endavant en aquest manual per a l'enviament de jobs.</p>
         </section>
 
         <section id="transferencia">
@@ -130,6 +104,31 @@ python script.py                    # Execució del vostre codi
                     <pre><code>scp nom.cognom@uvic.cat:/path/on/cluster/fitxer_remot.txt .</code></pre>
                 </li>
             </ul>
+        </section>
+
+        <section id="comandaments">
+            <h2>Comandaments de Slurm</h2>
+            <h3>2. Enviar el Job a Slurm</h3>
+            <p>Per enviar el job, utilitzeu:</p>
+            <pre><code>sbatch job_script.sh</code></pre>
+            <p>Això us retornarà un <strong>Job ID</strong> (per exemple, <code>12345</code>) que us servirà per fer seguiment del job.</p>
+
+            <h3>3. Consultar l’Estat dels Vostres Jobs</h3>
+            <p>Per veure l’estat dels vostres jobs (si estan en cua o en execució), utilitzeu:</p>
+            <pre><code>squeue</code></pre>
+            <h4>Estats Comuns:</h4>
+            <ul>
+                <li><strong>PD (PENDING):</strong> El job està en cua.</li>
+                <li><strong>R (RUNNING):</strong> El job està en execució.</li>
+            </ul>
+
+            <h3>4. Cancel·lar un Job</h3>
+            <p>Si necessiteu cancel·lar un job, utilitzeu:</p>
+            <pre><code>scancel 12345</code></pre>
+
+            <h3>5. Comprovar els Recursos Disponibles</h3>
+            <p>Per veure quins recursos (nodes i particions) estan disponibles, utilitzeu:</p>
+            <pre><code>sinfo</code></pre>
         </section>
     </main>
 
