@@ -85,7 +85,36 @@
 
         <section id="guia-basica">
             <h2>Guia Bàsica per Enviar Jobs</h2>
-            <p>Consulteu els passos detallats més endavant en aquest manual per a l'enviament de jobs.</p>
+            <h3>1. Crear un Fitxer de Treball (Script sbatch)</h3>
+            <p>
+                Es recomana mantenir una estructura clara per als vostres directoris:
+            </p>
+            <ul>
+                <li><strong>data/</strong>: Conté les dades d'entrada.</li>
+                <li><strong>results/</strong>: Guarda els resultats del càlcul.</li>
+                <li><strong>scripts/</strong>: Inclou els scripts de treball (<code>.sh</code>).</li>
+            </ul>
+            <h4>Exemple de Script Bàsic:</h4>
+            <pre><code>
+#!/bin/bash
+#SBATCH --job-name=nom_job          # Nom del job
+#SBATCH --output=sortida.txt        # Fitxer de sortida
+#SBATCH --error=error.txt           # Fitxer d’errors
+#SBATCH --time=01:00:00             # Temps màxim (hh:mm:ss)
+#SBATCH --cpus-per-task=4           # Nombre de CPUs per tasca
+#SBATCH --mem=4GB                   # Memòria assignada
+
+python script.py                    # Execució del vostre codi
+            </code></pre>
+            <p><strong>Comentaris:</strong></p>
+            <ul>
+                <li><code>--job-name</code>: Assigna un nom al vostre job per identificar-lo fàcilment.</li>
+                <li><code>--output</code>: Especifica el fitxer on es guardarà la sortida del job.</li>
+                <li><code>--error</code>: Indica el fitxer on es guardaran els errors.</li>
+                <li><code>--time</code>: Defineix el temps màxim d'execució del job.</li>
+                <li><code>--cpus-per-task</code>: Estableix el nombre de CPUs assignades al job.</li>
+                <li><code>--mem</code>: Defineix la memòria necessària per al job.</li>
+            </ul>
         </section>
 
         <section id="transferencia">
