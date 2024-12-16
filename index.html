@@ -1,41 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HPC Manual</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Vincle amb el CSS -->
+    <title>Manual Cluster HPC UVic-UCC</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Table of Contents -->
-    <h1 id="top">Manual Cluster HPC UVic-UCC</h1>
-    <h2>Table of Contents</h2>
-    <ul>
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#getting-started">Getting Started</a></li>
-        <li><a href="#examples">Examples</a></li>
-    </ul>
+    <header>
+        <h1>Manual Cluster HPC UVic-UCC</h1>
+    </header>
 
-    <!-- Sections -->
-    <section id="introduction">
-        <h2>Introduction</h2>
-        <p>Primer de tot per connectar-nos...</p>
-        <p class="back-to-top"><a href="#top">Back to Table of Contents</a></p>
-    </section>
+    <nav>
+        <h2>Índex</h2>
+        <ul>
+            <li><a href="#vpn-ssh">Connectar-se via VPN i SSH</a></li>
+            <li><a href="#slurm">Sistema de Gestió de Jobs: Slurm</a></li>
+            <li><a href="#guia-basica">Guia Bàsica per Enviar Jobs</a></li>
+            <li><a href="#transferencia">Transferència de Fitxers</a></li>
+        </ul>
+    </nav>
 
-    <section id="getting-started">
-        <h2>Getting Started</h2>
-        <p>Step-by-step guide to set up HPC.</p>
-        <p class="back-to-top"><a href="#top">Back to Table of Contents</a></p>
-    </section>
+    <main>
+        <section id="vpn-ssh">
+            <h2>Connectar-se via VPN i SSH</h2>
+            <h3>1. Connexió VPN</h3>
+            <p>Primer de tot, heu de seguir el tutorial per connectar-vos via VPN proporcionat per la universitat.</p>
+            <h3>2. Connexió SSH</h3>
+            <p>Per connectar-vos al clúster, executeu la següent comanda al terminal:</p>
+            <pre><code>ssh -l nom.cognom@uvic.cat</code></pre>
+            <p>Introduïu la contrasenya del vostre Campus Virtual quan us la demani.</p>
+        </section>
 
-    <section id="examples">
-        <h2>Example: Connect to the Cluster</h2>
-        <p>To connect to the cluster, use the following command in your terminal:</p>
-        <pre><code>ssh username@cluster.uvic-ucc.cat</code></pre>
-        <p>Replace <code>username</code> with your actual username.</p>
-        <p class="back-to-top"><a href="#top">Back to Table of Contents</a></p>
-    </section>
+        <section id="slurm">
+            <h2>Sistema de Gestió de Jobs: Slurm</h2>
+            <p>Un cop dins del clúster, utilitzem el sistema <strong>Slurm Management</strong>. Podeu trobar la documentació oficial en aquest enllaç: 
+                <a href="https://slurm.schedmd.com/documentation.html" target="_blank">Documentació de Slurm</a>.
+            </p>
+        </section>
+
+        <section id="guia-basica">
+            <h2>Guia Bàsica per Enviar Jobs</h2>
+            <h3>1. Crear un Fitxer de Treball (Script sbatch)</h3>
+            <p>Creeu un fitxer amb les ordres que voleu executar. Per exemple, podeu anomenar-lo <code>job_script.sh</code>.</p>
+            <pre><code>
+#!/bin/bash
+#SBATCH --job-name=nom_job           # Nom del job
+#SBATCH --output=sortida.txt          # Fitxer de sortida
+#SBATCH --error=error.txt             # Fitxer d’errors
+#SBATCH --time=01:00:00               # Temps màxim (hh:mm:ss)
+#SBATCH --cpus-per-task=4             # Núm. de CPUs per tasca
+#SBATCH --mem=4GB                     # Memòria assignada
+#SBATCH --partition=normal1           # Partició a utilitzar
+
+python script.py                      # Execució del codi
+            </code></pre>
+            <p>Els fitxers d’error us indiquen possibles problemes durant l’execució del codi.</p>
+            <p><strong>Nota:</strong> Heu de carregar els paquets necessaris abans d'executar el codi.</p>
+
+            <h3>2. Enviar el Job a Slurm</h3>
+            <p>Per enviar el job, utilitzeu la comanda:</p>
+            <pre><code>sbatch job_script.sh</code></pre>
+        </section>
+
+        <section id="transferencia">
+            <h2>Transferència de Fitxers</h2>
+            <p>Per transferir fitxers entre el vostre ordinador i el clúster, utilitzeu la comanda <code>scp</code>.</p>
+            <h3>Exemples de comandes <code>scp</code>:</h3>
+            <ul>
+                <li>Copiar un fitxer des del vostre ordinador al clúster:</li>
+                <pre><code>scp fitxer_local.txt nom.cognom@uvic.cat:/path/on/cluster</code></pre>
+                <li>Copiar un fitxer des del clúster al vostre ordinador:</li>
+                <pre><code>scp nom.cognom@uvic.cat:/path/on/cluster/fitxer_remot.txt .</code></pre>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Manual creat per ajudar a nous usuaris del clúster UVic-UCC.</p>
+    </footer>
 </body>
 </html>
 
