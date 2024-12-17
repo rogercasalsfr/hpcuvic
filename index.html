@@ -63,13 +63,20 @@
             <h2>Connectar-se via VPN i SSH</h2>
             <h3>1. Connexió VPN</h3>
             <p>
-                Primer de tot, heu de seguir el tutorial per connectar-vos via VPN proporcionat per la universitat.
+	        Primer de tot, per tal de connectar-vos al cluster, heu d'obrir el túnel via VPN. Us heu de descarregar la versió de <a href="https://slurm.schedmd.com/documentation.html" target="_blank">Forticlient</a> que sigui compatible amb el vostre sistema operatiu. 
+		Seguidament un cop us hagueu descarregat FortiClient, heu d'anar a l'apartat "Remote Access" i configurar de la següent manera:
+			Connection Name: 
+			Description:
+			Remote Gateway:
+			Customize Port:
+			I finalment cliqueu "Enable Single Sign-On"
+		Entreu amb el vostre correu UVic com a usuari i la vostra contrasenya, ho haureu d'autoritzar amb l'Authenticator abans de 60 segons.
             </p>
             <h3>2. Connexió SSH</h3>
             <p>
                 Per connectar-vos al clúster, executeu la següent comanda al terminal:
             </p>
-            <pre><code>ssh -l nom.cognom@uvic.cat</code></pre>
+            <pre><code>ssh -l nom.cognom@uvic.cat lavandula.uvic.local</code></pre>
             <p>
                 Introduïu la contrasenya del vostre Campus Virtual quan us la demani. 
                 Tingueu en compte que no podeu treballar de manera interactiva al clúster; és obligatori enviar jobs mitjançant Slurm.
