@@ -87,10 +87,12 @@
                 Es recomana mantenir una estructura clara per als vostres directoris:
             </p>
             <ul>
+		    Per a tal de crear directoris al vostre "home", heu d'utilitzar  <pre><code>mkdir</code></pre>
                 <li><strong>data/</strong>: Conté les dades d'entrada.</li>
                 <li><strong>results/</strong>: Guarda els resultats del càlcul.</li>
                 <li><strong>scripts/</strong>: Inclou els scripts de treball (<code>.sh</code>).</li>
             </ul>
+		Heu de crear un fitxer de 0, que contingui les comandes #SBATCH i canviar-les segons els requeriments.
             <h4>Exemple de Script Bàsic:</h4>
             <pre><code>
 #!/bin/bash
@@ -102,6 +104,7 @@
 #SBATCH --mem=4GB                   # Memòria assignada
 
 python script.py                    # Execució del vostre codi
+Rscript script.R                    # En cas que fos R	    
             </code></pre>
             <p><strong>Comentaris:</strong></p>
             <ul>
@@ -147,11 +150,11 @@ python script.py                    # Execució del vostre codi
             <ul>
                 <li>
                     Per copiar un fitxer des del vostre ordinador al clúster:
-                    <pre><code>scp fitxer_local.txt nom.cognom@uvic.cat:/path/on/cluster</code></pre>
+                    <pre><code>scp fitxer_local.txt NIU@192.168.133.2:/path/on/cluster</code></pre>
                 </li>
                 <li>
                     Per copiar un fitxer des del clúster al vostre ordinador:
-                    <pre><code>scp nom.cognom@uvic.cat:/path/on/cluster/fitxer_remot.txt .</code></pre>
+                    <pre><code>scp NIU@192.168.133.2:/path/on/cluster/fitxer_remot.txt .</code></pre>
                 </li>
             </ul>
         </section>
