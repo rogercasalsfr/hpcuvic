@@ -279,11 +279,24 @@ From: ubuntu:20.04
   
   <h3>3. Executar la imatge</h3>
   <p>
-    Un cop creada la imatge, pots executar-la amb:
+    Un cop creada la imatge, pots executar-la creant un altre fitxer sbatch, i per defecte ja podràs usar apptainer.
   </p>
-  <pre><code>apptainer run my_image.sif</code></pre>
+   <pre><code>
+#!/bin/bash
+#SBATCH --job-name=apptainer_test    # Nom del job
+#SBATCH --output=output.log          # Fitxer on es guarda la sortida
+#SBATCH --error=error.log            # Fitxer per errors
+#SBATCH --time=00:10:00              # Temps màxim d'execució
+#SBATCH --mem=1G                     # Memòria total requerida
+#SBATCH --cpus-per-task=1            # Nombre de CPUs
+#SBATCH --partition=normal1          # Partició a utilitzar
+
+# Executar la comanda dins del contenidor Apptainer
+apptainer run my_image.sif   # Run fa córrer tot el contenidor, si fessis servir exec, només executa la comanda que es vulgui.
+    </code></pre> 
   <p>
     Això obrirà una shell dins el contenidor o executarà l'aplicació definida al bloc <code>%runscript</code> del fitxer de recepta.
+	  
   </p>
   
   <h3>Recursos addicionals</h3>
