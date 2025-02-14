@@ -248,12 +248,51 @@ Rscript script.R                    # En cas que fos R
 	    <section id="apptainer">
   <h2>Apptainer</h2>
   <p>
-    Apptainer (anteriorment conegut com a Singularity) és una eina de contenidors que permet empaquetar una aplicació amb totes les seves dependències en un sol fitxer. Això facilita la portabilitat i la coherència de l'entorn d'execució, especialment en sistemes HPC, on és clau assegurar que el programari funcioni de la mateixa manera en diferents nodes.
+    Apptainer és una eina de contenidors dissenyada per facilitar l'execució d'aplicacions amb totes les seves dependències en entorns HPC. Com que ja està instal·lat en el nostre sistema, aquest tutorial se centrarà en com construir i utilitzar imatges de contenidors.
   </p>
+  
+  <h3>1. Creació d'una imatge amb un fitxer de recepta</h3>
   <p>
-    Si ets un usuari nou, trobaràs que Apptainer simplifica molt la feina, ja que t'evita haver de preocupar-te per les incompatibilitats entre diferents sistemes operatius o versions de biblioteques. Pròximament, introduirem un tutorial pas a pas per ajudar-te a començar a utilitzar-lo.
+    El primer pas és crear un fitxer de recepta (definition file).def que descrigui la base i les instruccions per construir la imatge. Per exemple, crea un fitxer anomenat <code>apptainer.def</code> amb el següent contingut:
+  </p>
+  <pre><code>Bootstrap: docker
+From: ubuntu:20.04
+
+%post
+    apt-get update && apt-get install -y python3     # Aquí pots instal·lar tots els paquets / llibreries necessàries
+
+%runscript
+    exec python3 "$@"</code></pre>
+  <p>
+    Aquest fitxer indica que la imatge es basarà en Ubuntu 20.04 i instal·larà Python3, segons les necessitats de l'usuari
+  </p>
+  
+  <h3>2. Construir la imatge</h3>
+  <p>
+    Una imatge és un fitxer que encapsula tot l'entorn necessari (sistema operatiu, aplicacions i dependències) per executar una aplicació de manera consistent i portable.
+	  Per construir la imatge, obre la terminal i executa: 
+  </p>
+  <pre><code>apptainer build my_image.sif apptainer.def</code></pre>
+  <p>
+    Aquest comandament crea un fitxer <code>my_image.sif</code> que conté la imatge del teu contenidor.
+  </p>
+  
+  <h3>3. Executar la imatge</h3>
+  <p>
+    Un cop creada la imatge, pots executar-la amb:
+  </p>
+  <pre><code>apptainer run my_image.sif</code></pre>
+  <p>
+    Això obrirà una shell dins el contenidor o executarà l'aplicació definida al bloc <code>%runscript</code> del fitxer de recepta.
+  </p>
+  
+  <h3>Recursos addicionals</h3>
+  <p>
+    Per a més tutorials i informació detallada sobre com treballar amb imatges en Apptainer, consulta la 
+    <a href="https://apptainer.org/docs/user/main/quick_start.html#building-images-from-scratch" target="_blank">documentació oficial d'Apptainer</a>.
   </p>
 </section>
+
 
 <section id="easybuild">
   <h2>Easybuild</h2>
