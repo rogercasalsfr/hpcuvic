@@ -274,8 +274,14 @@ From: ubuntu:20.04
   </p>
   <pre><code>apptainer build my_image.sif apptainer.def</code></pre>
   <p>
-    Aquest comandament crea un fitxer <code>my_image.sif</code> que conté la imatge del teu contenidor.
+    Aquesta comanda crea un fitxer <code>my_image.sif</code> que conté la imatge del teu contenidor.
   </p>
+ <h3>Convertir des de docker</h3>
+<p>
+    Per tal de poder descarregar directament una imatge de de docker, fem servir aquest codi, que generarà un fitxer .sif que ja el podrem executar.
+  </p>
+	  <pre><code>apptainer pull docker://hello-world</code></pre>
+
   
   <h3>3. Executar la imatge</h3>
   <p>
