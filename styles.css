@@ -71,12 +71,26 @@ code {
     color: #d63384;
 }
 
-/* Optional: Add a very subtle box shadow for depth */
-section, table {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Optional: For tables, add alternating row colors for better readability */
-table tbody tr:nth-child(even) {
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
