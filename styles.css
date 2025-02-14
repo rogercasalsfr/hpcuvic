@@ -94,3 +94,9 @@ th {
 tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+
+nav ul ul {
+    margin-left: 20px;
+    list-style-type: circle;
+}
+
