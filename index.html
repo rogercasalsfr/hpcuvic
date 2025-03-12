@@ -159,16 +159,17 @@ Rscript script.R                    # En cas que fos R
             <h2>Transferència de Fitxers</h2>
             <p>
                 Per transferir fitxers entre el vostre ordinador i el clúster, utilitzeu la comanda <code>scp</code>. En cas que vulgueu copiar tot el directori sencer, utilitzeu <code>scp -r</code> 
+		    IMPORTANT! Sempre ho heu de fer des del vostre ordinador.
             </p>
             <h3>Exemples de Comandes <code>scp</code>:</h3>
             <ul>
                 <li>
                     Per copiar un fitxer des del vostre ordinador al clúster:
-                    <pre><code>scp fitxer_local.txt NIU@192.168.133.2:/path/on/cluster</code></pre>
+                    <pre><code>scp fitxer.txt NIU@uvic.local@lavandula:CARPETA/CARPETA</code></pre>
                 </li>
                 <li>
                     Per copiar un fitxer des del clúster al vostre ordinador:
-                    <pre><code>scp NIU@192.168.133.2:/path/on/cluster/fitxer_remot.txt .</code></pre>
+                    <pre><code>scp NIU@uvic.local@lavandula:CARPETA/CARPETA/fitxer.txt .</code></pre>   Si afegim un punt al final de la frase és que ens ho copïi al directori al que estem.
                 </li>
             </ul>
         </section>
