@@ -169,8 +169,7 @@ Rscript script.R                    # En cas que fos R
     <h3>2. Enviament de treballs</h3>
     <ul>
         <li><code>sbatch script.sh</code> → Envia un treball al clúster mitjançant un script.</li>
-        <li><code>salloc --time=1:00:00 --ntasks=1 --mem=4G</code> → Reserva un node interactiu per 1 hora.</li>
-        <li><code>srun --pty bash -i</code> → Obre una sessió interactiva al clúster.</li>
+
     </ul>
 
     <h3>3. Gestió de treballs</h3>
@@ -178,6 +177,7 @@ Rscript script.R                    # En cas que fos R
         <li><code>scancel <job_id></code> → Cancel·la un treball específic.</li>
         <li><code>scancel -u $USER</code> → Cancel·la tots els teus treballs en execució.</li>
         <li><code>scontrol show job <job_id></code> → Mostra informació detallada d’un treball.</li>
+	    <li><code>seff job <job_id></code> → Mostra l'informe d'eficiència que s'envia per correu.</li>
     </ul>
 
     <h3>4. Transferència de fitxers</h3>
