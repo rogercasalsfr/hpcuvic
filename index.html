@@ -17,7 +17,7 @@
             <li><a href="#introduccio">Introducció i Recursos del Clúster</a></li>
             <li><a href="#vpn-ssh">Connectar-se via VPN i SSH</a></li>
             <li><a href="#guia-basica">Guia Bàsica per Enviar Jobs</a></li>
-            <li><a href="#transferencia">Transferència de Fitxers</a></li>
+            <li><a href="#transferencia">Comandes Bàsiques</a></li>
 	    <li><a href="#particions">Característiques de les Particions</a></li>
 		<li>
       <a href="#software">Tutorials per a usar el Software</a>
@@ -156,22 +156,50 @@ Rscript script.R                    # En cas que fos R
         </section>
 
         <section id="transferencia">
-            <h2>Transferència de Fitxers</h2>
-            <p>
-                Per transferir fitxers entre el vostre ordinador i el clúster, utilitzeu la comanda <code>scp</code>. En cas que vulgueu copiar tot el directori sencer, utilitzeu <code>scp -r</code> 
-		    IMPORTANT! Sempre ho heu de fer des del vostre ordinador.
-            </p>
-            <h3>Exemples de Comandes <code>scp</code>:</h3>
-            <ul>
-                <li>
-                    Per copiar un fitxer des del vostre ordinador al clúster:
-                    <pre><code>scp fitxer.txt NIU@uvic.local@lavandula:CARPETA/CARPETA</code></pre>
-                </li>
-                <li>
-                    Per copiar un fitxer des del clúster al vostre ordinador:
-                    <pre><code>scp NIU@uvic.local@lavandula:CARPETA/CARPETA/fitxer.txt .</code></pre>   Si afegim un punt al final de la frase és que ens ho copïi al directori al que estem.
-                </li>
-            </ul>
+          <h2>Comandes bàsiques de SLURM</h2>
+    
+    <h3>1. Consultar l’estat del clúster</h3>
+    <ul>
+        <li><code>sinfo</code> → Mostra l’estat dels nodes i particions disponibles.</li>
+        <li><code>squeue</code> → Mostra tots els treballs en cua.</li>
+        <li><code>squeue -u $USER</code> → Mostra només els teus treballs en cua.</li>
+        <li><code>squeue -j <job_id></code> → Consulta l'estat d'un treball específic.</li>
+    </ul>
+
+    <h3>2. Enviament de treballs</h3>
+    <ul>
+        <li><code>sbatch script.sh</code> → Envia un treball al clúster mitjançant un script.</li>
+        <li><code>salloc --time=1:00:00 --ntasks=1 --mem=4G</code> → Reserva un node interactiu per 1 hora.</li>
+        <li><code>srun --pty bash -i</code> → Obre una sessió interactiva al clúster.</li>
+    </ul>
+
+    <h3>3. Gestió de treballs</h3>
+    <ul>
+        <li><code>scancel <job_id></code> → Cancel·la un treball específic.</li>
+        <li><code>scancel -u $USER</code> → Cancel·la tots els teus treballs en execució.</li>
+        <li><code>scontrol show job <job_id></code> → Mostra informació detallada d’un treball.</li>
+    </ul>
+
+    <h3>4. Transferència de fitxers</h3>
+    <p>
+        Per enviar i rebre fitxers entre el vostre ordinador i el clúster, utilitzeu la comanda <code>scp</code>. 
+        Si voleu copiar tot un directori, podeu utilitzar <code>scp -r</code>. 
+        IMPORTANT: La transferència s’ha de fer sempre des del vostre ordinador.
+    </p>
+
+    <h4>Exemples:</h4>
+    <ul>
+        <li>
+            Copiar un fitxer des del vostre ordinador al clúster:
+            <pre><code>scp fitxer.txt NIU@uvic.local@lavandula:CARPETA/CARPETA</code></pre>
+        </li>
+        <li>
+            Copiar un fitxer del clúster al vostre ordinador:
+            <pre><code>scp NIU@uvic.local@lavandula:CARPETA/CARPETA/fitxer.txt .</code></pre>
+            (El punt final indica que es copiarà al directori actual.)
+        </li>
+    </ul>
+
         </section>
 
 	    <section id="particions">
