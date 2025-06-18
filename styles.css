@@ -16,7 +16,8 @@ header {
 }
 
 .logo {
-    height: 50px; /* adjust as needed */
+    height: 20px; /* or 30px, adjust as needed */
+    object-fit: contain;
 }
 
 
