@@ -9,11 +9,16 @@ body {
 
 /* Header styles */
 header {
-    background-color: #0056b3;
-    color: white;
-    padding: 20px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* spacing between image and title */
+    padding: 1rem;
 }
+
+.logo {
+    height: 50px; /* adjust as needed */
+}
+
 
 /* Navigation styles */
 nav {
